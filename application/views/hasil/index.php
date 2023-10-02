@@ -119,6 +119,7 @@
                     <th>Akhir Bulan</th>
                     <th>Curah Hujan</th>
                     <th>List Hama</th>
+                    <th>Penanggulangan</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -130,9 +131,13 @@
                       <td> <?= $key['bulan_akhir']; ?> </td>
                       <td> <?= $key['tipe_ch']; ?> </td>
                       <td> <?= $key['daftar_hama']; ?> </td>
+                      <td>
+                        <button class="btn btn-primary btn-show-control" data-hama="<?= $key['daftar_hama']; ?>">Tampilkan</button>
+                      </td>
                     </tr>
                   <?php endforeach; ?>
                 </tbody>
+
               </table>
             </div>
           </div>
@@ -358,6 +363,35 @@
       }
       return number
     }
+
+// Add this JavaScript code to your existing script block
+
+// Handle click event to display control methods
+document.addEventListener('click', function (event) {
+  if (event.target.classList.contains('btn-show-control')) {
+    const hama = event.target.getAttribute('data-hama');
+    displayControlMethods(hama);
+  }
+});
+
+// Function to fetch and display control methods based on hama
+function displayControlMethods(hama) {
+  // You should have a JSON data structure containing hama and corresponding control methods
+  const controlMethodsData = {
+    "hama1": "Penanggulangan hama 1: Cara 1, Cara 2, Cara 3",
+    "hama2": "Penanggulangan hama 2: Cara 4, Cara 5",
+    // Add more hama and control methods as needed
+  };
+
+  // Check if the hama exists in the data
+  if (controlMethodsData.hasOwnProperty(hama)) {
+    const controlMethods = controlMethodsData[hama];
+    alert(`Penanggulangan untuk hama ${hama}: \n${controlMethods}`);
+  } else {
+    alert(`Tidak ada informasi penanggulangan untuk hama ${hama}`);
+  }
+}
+
   </script>
 
   <script>
